@@ -1,6 +1,6 @@
 package org.example.UserPortal.repositories;
 
-import org.example.UserPortal.entity.Student;
+
 import org.example.UserPortal.entity.Subject;
 import org.springframework.data.jpa.repository.JpaRepository;
 

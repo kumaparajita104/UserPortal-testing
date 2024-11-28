@@ -12,6 +12,8 @@ public class TeacherDisplayDTO
     String email;
     Long sub_id;
 
+    public TeacherDisplayDTO() {
+    }
 
     public TeacherDisplayDTO(Long id, String name, String email, Long s_id)
     {

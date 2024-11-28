@@ -1,4 +1,4 @@
-TeacherControllerMutationTest.class
-UserControllerMutationTest.class
-UserServiceImplMutationTest.class
-SubjectServiceImplTest.class
+org/example/UserPortal/UserServiceImplMutationTest.class
+org/example/UserPortal/TeacherServiceImplTest.class
+org/example/UserPortal/SubjectServiceImplTest.class
+org/example/UserPortal/UserControllerMutationTest.class

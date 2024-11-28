@@ -10,20 +10,21 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 @Service
 public class UserServiceImpl implements UserService {
 
-    private SubjectRepository subjectRepository;
-    private StudentRepository studentRepository;
-    private TeacherRepository teacherRepository;
+    SubjectRepository subjectRepository;
+    StudentRepository studentRepository;
+    TeacherRepository teacherRepository;
 
-    private UserRepository userRepository;
+    UserRepository userRepository;
 
-    private RoleRepository roleRepository;
+    RoleRepository roleRepository;
 
-    private AdminRepository adminRepository;
+    AdminRepository adminRepository;
 
     public UserServiceImpl(SubjectRepository subjectRepository, StudentRepository studentRepository, TeacherRepository teacherRepository, ModelMapper modelMapper,RoleRepository roleRepository,UserRepository userRepository,AdminRepository adminRepository) {
 
@@ -139,7 +140,7 @@ public class UserServiceImpl implements UserService {
     public String loginTeacher(TeacherLoginDTO teacherLoginDTO) {
         Teacher teacher=teacherRepository.getTeacherByEmail(teacherLoginDTO.getEmail()).orElseThrow(()->new UsernameNotFoundException("teacher","email",teacherLoginDTO.getEmail()));
         User user=teacher.getUser();
-        if(teacherLoginDTO.getPassword()==user.getPassword())
+        if(Objects.equals(teacherLoginDTO.getPassword(), user.getPassword()))
             return "Login Successful";
         else
         {
@@ -151,7 +152,7 @@ public class UserServiceImpl implements UserService {
     public String loginStudent(StudentLoginDTO studentLoginDTO) {
         Student student=studentRepository.findStudentByEmail(studentLoginDTO.getEmail()).orElseThrow(()->new UsernameNotFoundException("student","email",studentLoginDTO.getEmail()));
         User user=student.getUser();
-        if(studentLoginDTO.getPassword()==user.getPassword())
+        if(Objects.equals(studentLoginDTO.getPassword(), user.getPassword()))
             return "Login Successful";
         else
         {
@@ -164,7 +165,7 @@ public class UserServiceImpl implements UserService {
     {
         Admin admin=adminRepository.findAdminById(adminLoginDTO.getId()).orElseThrow(()->new ResourceNotFoundException("admin","id",adminLoginDTO.getId()));
         User user=admin.getUser();
-        if(user.getEmail()==adminLoginDTO.getEmail() && user.getPassword()==adminLoginDTO.getPassword())
+        if(Objects.equals(user.getEmail(), adminLoginDTO.getEmail()) && Objects.equals(user.getPassword(),adminLoginDTO.getPassword()))
             return "Login Successful";
         else return "Login unsuccessful";
 

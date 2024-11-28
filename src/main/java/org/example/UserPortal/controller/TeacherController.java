@@ -28,7 +28,7 @@ public class TeacherController
         return new ResponseEntity<>(teacherDisplayDto, HttpStatus.OK);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/info/{id}")
     public ResponseEntity<TeacherDisplayDTO> getTeacherById(@PathVariable(value="id")Long id)
     {
         return ResponseEntity.ok(teacherService.getInfo(id));

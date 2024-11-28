@@ -20,9 +20,9 @@ import java.util.stream.Collectors;
 public class SubjectServiceImpl implements SubjectService
 {
 
-    private SubjectRepository subjectRepository;
-    private StudentRepository studentRepository;
-    private TeacherRepository teacherRepository;
+     SubjectRepository subjectRepository;
+     StudentRepository studentRepository;
+     TeacherRepository teacherRepository;
 
     ModelMapper modelMapper;
 
@@ -48,8 +48,7 @@ public class SubjectServiceImpl implements SubjectService
         subject.setTeacher(teacher);
         subject.setMaxCount(subjectDTO.getMaxCount());
         subjectRepository.save(subject);
-        SubjectDTO new_subject=maptoDTO(subject);
-        return new_subject;
+        return maptoDTO(subject);
 
     }
 
@@ -68,7 +67,7 @@ public class SubjectServiceImpl implements SubjectService
     @Override
     public List<SubjectDTO> getALlSubjects() {
         List<Subject> subjects=subjectRepository.findAll();
-        return subjects.stream().map(subject1 -> maptoDTO(subject1)).collect(Collectors.toList());
+        return subjects.stream().map(this::maptoDTO).collect(Collectors.toList());
     }
 
     @Override
@@ -76,24 +75,21 @@ public class SubjectServiceImpl implements SubjectService
     {
         Subject subject=subjectRepository.findSubjectById(sub_id).orElseThrow(() -> new ResourceNotFoundException("subject","id",sub_id));
         List<Student> students=subject.getStudents();
-        return students.stream().map(student1 -> maptoDTO(student1)).collect(Collectors.toList());
+        return students.stream().map(this::maptoDTO).collect(Collectors.toList());
 
     }
 
     private SubjectDTO maptoDTO(Subject subject)
         {
-            SubjectDTO subjectDTO=modelMapper.map(subject,SubjectDTO.class);
-            return subjectDTO;
+            return modelMapper.map(subject,SubjectDTO.class);
         }
     private StudentDTO maptoDTO(Student student)
     {
-        StudentDTO studentDTO=modelMapper.map(student,StudentDTO.class);
-        return studentDTO;
+        return modelMapper.map(student,StudentDTO.class);
     }
     private Subject maptoEntity(SubjectDTO subjectDTO)
     {
-        Subject subject=modelMapper.map(subjectDTO,Subject.class);
-        return subject;
+        return modelMapper.map(subjectDTO,Subject.class);
     }
 
 }
