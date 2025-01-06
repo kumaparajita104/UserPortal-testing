@@ -5,7 +5,8 @@ import org.example.UserPortal.exception.ResourceNotFoundException;
 import org.example.UserPortal.exception.UsernameNotFoundException;
 import org.example.UserPortal.payload.*;
 import org.example.UserPortal.repositories.*;
-import org.example.UserPortal.services.UserService;
+import org.example.UserPortal.services.*;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 

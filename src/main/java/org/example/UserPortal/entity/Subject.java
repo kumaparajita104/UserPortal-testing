@@ -23,6 +23,7 @@ public class Subject
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "student_id")
     Student student;
+
     @OneToOne(mappedBy = "subject",cascade = CascadeType.ALL,orphanRemoval = true)
     Teacher teacher;
     @ManyToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)

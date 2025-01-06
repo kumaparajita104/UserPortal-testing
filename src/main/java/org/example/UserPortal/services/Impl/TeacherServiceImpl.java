@@ -1,8 +1,7 @@
 package org.example.UserPortal.services.Impl;
 
 import org.example.UserPortal.entity.Student;
-import org.example.UserPortal.entity.Subject;
-import org.example.UserPortal.entity.Teacher;
+import org.example.UserPortal.entity.*;
 import org.example.UserPortal.exception.ResourceNotFoundException;
 import org.example.UserPortal.exception.UsernameNotFoundException;
 import org.example.UserPortal.payload.StudentDTO;
@@ -12,7 +11,7 @@ import org.example.UserPortal.payload.TeacherDisplayDTO;
 import org.example.UserPortal.repositories.StudentRepository;
 import org.example.UserPortal.repositories.SubjectRepository;
 import org.example.UserPortal.repositories.TeacherRepository;
-import org.example.UserPortal.services.TeacherService;
+import org.example.UserPortal.services.*;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 

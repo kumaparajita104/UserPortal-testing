@@ -12,6 +12,11 @@ import java.util.List;
 
 public class SubjectDTO
 {
+    Long id;
+    String name;
+    int maxCount;
+    Long teacher_id;
+    List<StudentDTO> students;
     public SubjectDTO() {
     }
 
@@ -23,9 +28,5 @@ public class SubjectDTO
         this.students = students;
     }
 
-    Long id;
-    String name;
-    int maxCount;
-    Long teacher_id;
-    List<StudentDTO> students;
+
 }

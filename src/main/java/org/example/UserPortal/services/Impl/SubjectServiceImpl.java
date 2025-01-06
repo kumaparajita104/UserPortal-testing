@@ -1,15 +1,11 @@
 package org.example.UserPortal.services.Impl;
 
-import org.example.UserPortal.entity.Student;
-import org.example.UserPortal.entity.Subject;
-import org.example.UserPortal.entity.Teacher;
-import org.example.UserPortal.exception.ResourceNotFoundException;
-import org.example.UserPortal.payload.StudentDTO;
-import org.example.UserPortal.payload.SubjectDTO;
-import org.example.UserPortal.repositories.StudentRepository;
-import org.example.UserPortal.repositories.SubjectRepository;
-import org.example.UserPortal.repositories.TeacherRepository;
-import org.example.UserPortal.services.SubjectService;
+import org.example.UserPortal.entity.*;
+import org.example.UserPortal.exception.*;
+import org.example.UserPortal.payload.*;
+import org.example.UserPortal.repositories.*;
+
+import org.example.UserPortal.services.*;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
@@ -42,13 +38,14 @@ public class SubjectServiceImpl implements SubjectService
 
     @Override
     public SubjectDTO updateInfo(SubjectDTO subjectDTO) {
-        Teacher teacher=teacherRepository.findById(subjectDTO.getTeacher_id()).orElseThrow(()-> new ResourceNotFoundException("subject","id",subjectDTO.getTeacher_id()));
-        Subject subject=maptoEntity(subjectDTO);
-        subject.setName(subjectDTO.getName());
-        subject.setTeacher(teacher);
-        subject.setMaxCount(subjectDTO.getMaxCount());
-        subjectRepository.save(subject);
-        return maptoDTO(subject);
+        Subject subject=subjectRepository.findSubjectById(subjectDTO.getId()).orElseThrow(()-> new ResourceNotFoundException("subject","id", subjectDTO.getId()));
+        Teacher teacher=teacherRepository.getTeacherById(subject.getTeacher().getId()).orElseThrow(() -> new ResourceNotFoundException("teacher","id",subject.getId()));
+        Subject subject1=maptoEntity(subjectDTO);
+        subject1.setName(subjectDTO.getName());
+        subject1.setTeacher(teacher);
+        subject1.setMaxCount(subjectDTO.getMaxCount());
+        subjectRepository.save(subject1);
+        return maptoDTO(subject1);
 
     }
 
